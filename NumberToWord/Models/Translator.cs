@@ -14,14 +14,18 @@ namespace NumberToWord.Models
         };
         // Dict holds 10 - 90
         public static Dictionary<long, string> Dictionary3 = new Dictionary<long, string>(){
-            {10, "Ten"}, {20, "Twenty"}, {3, "Thirty"}, {4, "Forty"}, {5, "Fifty"}, {6, "Sixty"}, {7, "Seventy"}, {8, "Eighty"}, {9, "Ninety"}
+            {1, "Ten"}, {2, "Twenty"}, {3, "Thirty"}, {4, "Forty"}, {5, "Fifty"}, {6, "Sixty"}, {7, "Seventy"}, {8, "Eighty"}, {9, "Ninety"}
         };
 
-        // Dict holds numbers of digits (track how many digits the user input is. This is referenced when input is more than 3 digits)
-        public static Dictionary<long, string> Dictionary4 = new Dictionary<long, string>(){
-            {100, "Hundred"}, {1000, "Thousand"}, {1000000, "Million"}, {1000000000, "Billion"}, {1000000000000, "Trillion"}
-        };
-        public static List<string> NumberToWord = new List<string>();
+        public static int Input { get; set; }
+        public static string Output { get; set; }
+
+        public Translator (int input)
+        {
+            Input = input;
+            Output = "";
+        }
+
         public static string TranslateInWord(long userInput)
         {
             Stack<long> myStack = new Stack<long>();
