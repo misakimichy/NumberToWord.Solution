@@ -10,7 +10,7 @@ namespace NumberToWord.Models
         };
         // Dict holds 11 - 19
         public static Dictionary<long, string> Dictionary2 = new Dictionary<long, string>(){
-            {11, "Eleven"}, {12, "Twelve"}, {31, "Thirteen"}, {14, "Forteen"}, {15, "Fifteen"}, {16, "Sixteen"}, {17, "Seventeen"}, {18, "Eighteen"}, {19, "Nineteen"}
+            {11, "Eleven"}, {12, "Twelve"}, {13, "Thirteen"}, {14, "Forteen"}, {15, "Fifteen"}, {16, "Sixteen"}, {17, "Seventeen"}, {18, "Eighteen"}, {19, "Nineteen"}
         };
         // Dict holds 10 - 90
         public static Dictionary<long, string> Dictionary3 = new Dictionary<long, string>(){
@@ -72,7 +72,7 @@ namespace NumberToWord.Models
                     case 9:
                         num = myStack.Pop();
                         Dictionary1.TryGetValue(num, out word);
-                        result +=  word + " " + "Hundred" + " ";
+                        result += word + " " + "Hundred" + " ";
                         break;
                     case 8:
                         num = myStack.Pop();
@@ -109,7 +109,7 @@ namespace NumberToWord.Models
                         if(num > 1)
                         {
                             Dictionary3.TryGetValue(num * 10, out word);
-                            result += word ;  
+                            result += word + " ";
                         }
                         else if (num == 0)
                         {}
