@@ -26,6 +26,12 @@ namespace NumberToWord.Models
             Output = "";
         }
 
+        public static bool CheckZero ()
+        {
+            bool isZero = Input ? true : false;
+            return isZero;
+        }
+
         public static string TranslateInWord(long userInput)
         {
             Stack<long> myStack = new Stack<long>();
