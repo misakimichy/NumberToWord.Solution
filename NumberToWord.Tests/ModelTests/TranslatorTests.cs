@@ -19,5 +19,67 @@ namespace NumberToWord.Test
             Assert.AreEqual(true, Translator.CheckZero(Translator.Input));
         }
 
+        [TestMethod]
+        public void Convert_SingleDigitNumberToWord_Three()
+        {
+            Translator.Input = 3;
+            Assert.AreEqual("Three", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_TeensToWord_Fifteen()
+        {
+            Translator.Input = 15;
+            Assert.AreEqual("Fifteen", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_10sToWord_Sixty()
+        {
+            Translator.Input = 60;
+            Assert.AreEqual("Sixty", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_LessThan100ToWord_SixtyEight()
+        {
+            Translator.Input = 68;
+            Assert.AreEqual("Sixty Eight", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_100sToWord_TwoHundred()
+        {
+            Translator.Input = 200;
+            Assert.AreEqual("Two Hundred", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_LessThan1000ToWord_TwoHundred()
+        {
+            Translator.Input = 123;
+            Assert.AreEqual("One Hundred Twenty Three", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_1000sToWord_FiveThousand()
+        {
+            Translator.Input = 5000;
+            Assert.AreEqual("Five Thousand", Translator.Convert(Translator.Input));
+        }
+
+        [TestMethod]
+        public void Convert_LessThan10000ToWord_FiveThousand()
+        {
+            Translator.Input = 5678;
+            Assert.AreEqual("Five Thousand Six Hundred Seventy Eight", Translator.Convert(Translator.Input));
+        }
+
+        // [TestMethod]
+        // public void Convert_10000sToWord_TenThousand()
+        // {
+        //     Translator.Input = 10000;
+        //     Assert.AreEqual("Ten Thousand", Translator.Convert(Translator.Input));
+        // }
     }
 }

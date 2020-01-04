@@ -5,145 +5,80 @@ namespace NumberToWord.Models
     public class Translator
     {
         // Dict holds 1 - 9
-        public static Dictionary<long, string> Dictionary1 = new Dictionary<long, string>(){
+        public static Dictionary<long, string> SingleDigits = new Dictionary<long, string>(){
             {1, "One"}, {2, "Two"}, {3, "Three"}, {4, "Four"}, {5, "Five"}, {6, "Six"}, {7, "Seven"}, {8, "Eight"}, {9, "Nine"}
         };
         // Dict holds 11 - 19
-        public static Dictionary<long, string> Dictionary2 = new Dictionary<long, string>(){
+        public static Dictionary<long, string> Teens = new Dictionary<long, string>(){
             {11, "Eleven"}, {12, "Twelve"}, {13, "Thirteen"}, {14, "Forteen"}, {15, "Fifteen"}, {16, "Sixteen"}, {17, "Seventeen"}, {18, "Eighteen"}, {19, "Nineteen"}
         };
         // Dict holds 10 - 90
-        public static Dictionary<long, string> Dictionary3 = new Dictionary<long, string>(){
+        public static Dictionary<long, string> Tens = new Dictionary<long, string>(){
             {1, "Ten"}, {2, "Twenty"}, {3, "Thirty"}, {4, "Forty"}, {5, "Fifty"}, {6, "Sixty"}, {7, "Seventy"}, {8, "Eighty"}, {9, "Ninety"}
         };
+        public static int Input;
+        public static string Output = "";
 
-        public static int Input { get; set; }
-        public static string Output { get; set; }
-
-        public Translator (int input)
+        public static bool CheckZero(int number)
         {
-            Input = input;
-            Output = "";
-        }
-
-        public static bool CheckZero ()
-        {
-            bool isZero = Input ? true : false;
+            bool isZero = number == 0 ? true : false;
             return isZero;
         }
 
-        public static string TranslateInWord(long userInput)
+        public static string ConvertMoreThan100(int inputNumber, int num, string numWord)
         {
-            Stack<long> myStack = new Stack<long>();
-            char[] numArray = userInput.ToString().ToCharArray();
-            for (int i = numArray.Length - 1; i >= 0; i--)
+            int divided = inputNumber / num;
+            int remainder = inputNumber % num;
+            if(divided > 9)
             {
-                myStack.Push(Convert.ToInt64(Char.GetNumericValue(numArray[i])));
+                return Convert(divided);
             }
-            int count = myStack.Count;
-            string result = "";
-            string word;
-            while(count > 0)
+            else
             {
-                word = "";
-                long num = 0;
-                switch(count)
+                if(remainder == 0)
                 {
-                    case 15:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Hundred" + " ";
-                        break;
-                    case 14:
-                        num = myStack.Pop();
-                        Dictionary3.TryGetValue(num * 10, out word);
-                        result += word + " ";
-                        break;
-                    case 13:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Trillion" + " ";
-                        break;
-                    case 12:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Hundred" + " ";
-                        break;
-                    case 11:
-                        num = myStack.Pop();
-                        Dictionary3.TryGetValue(num * 10, out word);
-                        result += word;
-                        break;
-                    case 10:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Billion" + " ";
-                        break;
-                    case 9:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Hundred" + " ";
-                        break;
-                    case 8:
-                        num = myStack.Pop();
-                        Dictionary3.TryGetValue(num * 10, out word);
-                        result += word;
-                        break;
-                    case 7:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Million" + " ";
-                        break;
-                    case 6:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Hundred" + " ";
-                        break;
-                    case 5:
-                        num = myStack.Pop();
-                        Dictionary3.TryGetValue(num * 10, out word);
-                        result += word;
-                        break;
-                    case 4:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Thousand" + " ";
-                        break;
-                    case 3:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word + " " + "Hundred" + " ";
-                        break;
-                    case 2:
-                        num = myStack.Pop();
-                        if(num > 1)
-                        {
-                            Dictionary3.TryGetValue(num * 10, out word);
-                            result += word + " ";
-                        }
-                        else if (num == 0)
-                        {}
-                        else if (num == 1 && myStack.Peek() == 0)
-                        {
-                            Dictionary3.TryGetValue(10, out word);
-                            result += word;
-                        }
-                        else
-                        {
-                            num = myStack.Pop();
-                            Dictionary2.TryGetValue(num + 10, out word);
-                            result += word;
-                        }
-                        break;
-                    case 1:
-                        num = myStack.Pop();
-                        Dictionary1.TryGetValue(num, out word);
-                        result += word;
-                        break;
+                    return Output += SingleDigits[divided] + " " + numWord;
                 }
-                count = myStack.Count;
+                else
+                {
+                    Output += SingleDigits[divided] + " " + numWord + " ";
+                    return Convert(remainder); 
+                }
             }
-            return result;
+        }
+
+        public static string Convert(int number)
+        {
+            if (number < 10)
+            {
+                Output += SingleDigits[number];
+            }
+            else if (number < 20 && number != 10)
+            {
+                Output += Teens[number];
+            }
+            else if (number < 99)
+            {
+                int divided = number / 10;
+                int remainder = number % 10;
+                if(remainder == 0)
+                {
+                    Output += Tens[divided];
+                }
+                else
+                {
+                    Output += Tens[divided] + " " + SingleDigits[remainder];
+                }
+            }
+            else if (number > 99 && number < 1000)
+            {
+                ConvertMoreThan100(number, 100, "Hundred");
+            }
+            else if (number > 999 && number < 100000)
+            {
+                ConvertMoreThan100(number, 1000, "Thousand");
+            }
+            return Output;
         }
     }
 }
