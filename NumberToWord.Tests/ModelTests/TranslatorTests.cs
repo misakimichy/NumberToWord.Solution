@@ -55,7 +55,7 @@ namespace NumberToWord.Test
         }
 
         [TestMethod]
-        public void Convert_LessThan1000ToWord_TwoHundred()
+        public void Convert_LessThan1000ToWord_OneHundredTwentyThree()
         {
             Translator.Input = 123;
             Assert.AreEqual("One Hundred Twenty Three", Translator.Convert(Translator.Input));
@@ -69,17 +69,10 @@ namespace NumberToWord.Test
         }
 
         [TestMethod]
-        public void Convert_LessThan10000ToWord_FiveThousand()
+        public void Convert_LessThan10000ToWord_NineThousandNineHundredNinetyNine()
         {
-            Translator.Input = 5678;
-            Assert.AreEqual("Five Thousand Six Hundred Seventy Eight", Translator.Convert(Translator.Input));
+            Translator.Input = 9999;
+            Assert.AreEqual("Nine Thousand Nine Hundred Ninety Nine", Translator.Convert(Translator.Input));
         }
-
-        // [TestMethod]
-        // public void Convert_10000sToWord_TenThousand()
-        // {
-        //     Translator.Input = 10000;
-        //     Assert.AreEqual("Ten Thousand", Translator.Convert(Translator.Input));
-        // }
     }
 }

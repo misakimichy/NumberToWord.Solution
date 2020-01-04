@@ -25,24 +25,24 @@ namespace NumberToWord.Models
             return isZero;
         }
 
-        public static string ConvertMoreThan100(int inputNumber, int num, string numWord)
+        public static void ConvertMoreThan100(int inputNumber, int num, string numWord)
         {
             int divided = inputNumber / num;
             int remainder = inputNumber % num;
             if(divided > 9)
             {
-                return Convert(divided);
+                Convert(divided);
             }
             else
             {
                 if(remainder == 0)
                 {
-                    return Output += SingleDigits[divided] + " " + numWord;
+                    Output += SingleDigits[divided] + " " + numWord;
                 }
                 else
                 {
                     Output += SingleDigits[divided] + " " + numWord + " ";
-                    return Convert(remainder); 
+                    Convert(remainder);
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace NumberToWord.Models
             {
                 Output += Teens[number];
             }
-            else if (number < 99)
+            else if (number <= 99)
             {
                 int divided = number / 10;
                 int remainder = number % 10;
