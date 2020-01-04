@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using NumberToWord.Models;
 
 namespace NumberToWord.Test
@@ -8,16 +7,16 @@ namespace NumberToWord.Test
     [TestClass]
     public class TranslatorTests : IDisposable
     {
-        public void Disposable()
+        public void Dispose()
         {
             Translator.Output = "";
         }
 
         [TestMethod]
-        public void CheckZero__ZeroToWord_Zero()
+        public void CheckZero_ZeroToWord_Zero()
         {
-            Translator tranlatorTest = new Translator(0);
-            Assert.AreEqual(true, Translator.CheckZero(Translator.input));
+            Translator.Input = 0;
+            Assert.AreEqual(true, Translator.CheckZero(Translator.Input));
         }
 
     }
